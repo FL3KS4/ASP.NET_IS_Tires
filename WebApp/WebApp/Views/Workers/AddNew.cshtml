@@ -1,0 +1,73 @@
+﻿@model Eshop
+@using WebApp_project.Models
+@{
+    ViewData["Title"] = "Přidat položku";
+    Layout = "~/Views/Workers/WLayout.cshtml";
+}
+
+<div class="container d-flex justify-content-center">
+    <div class="row">
+
+        <div class="card" style="width: auto; margin-top:2%;">
+            <div class="card-body">
+                <h5 class="card-title">Přidat položku</h5>
+                <p class="card-text">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.typ)
+                            <div class="col-sm-12">
+                                @Html.DropDownListFor(x => x.typ, (List<SelectListItem>)ViewBag.Types, new { @class = "form-control" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.typ)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.znacka)
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.znacka, new { @class = "form-control", placeholder = "Barum polaris 5" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.znacka)</div>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.rozmery)
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.rozmery, new { @class = "form-control", placeholder = "195/65 R15" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.rozmery)</div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(x => x.pocet)
+                                @Html.TextBoxFor(x => x.pocet, new { @class = "form-control", placeholder = "40", @type = "number", min="0"})
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.pocet)</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(x => x.cena)
+                                @Html.TextBoxFor(x => x.cena, new { @class = "form-control", placeholder = "1500", @type = "number", min="0"})
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.cena)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.poznamka)
+                            <div class="col-sm-12">
+                                @Html.TextAreaFor(x => x.poznamka, new { @class = "form-control" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.poznamka)</div>
+                            </div>
+                        </div>
+
+
+
+                        <br />
+                        <button type="submit" class="btn btn-success">Přidat položku</button>
+                    }
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@model Eshop
+@using WebApp_project.Models
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <h1>Eshop</h1>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.znacka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rozmery)
+            </th>
+            <th>
+                Skladem
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cena)
+            </th>
+            <th>
+                <input class="filter" type="text" name="FindInp" value="" placeholder="Barum" style="float:right;" />
+            </th>
+        </tr>
+    </thead>
+    <tbody class="AllTires">
+        @foreach (Eshop item in ViewBag.Tires)
+        {
+        <tr>
+            <td>
+                <a asp-action="ItemDetail" asp-route-id="@item.ID"> @Html.DisplayFor(modelItem => item.znacka)</a>          
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rozmery)
+            </td>
+
+            @if (@item.pocet > 0)
+            {
+                <td data-toggle="tooltip" title="@item.pocet kusů skladem" data-placement="right">
+                    ✔️
+                </td>
+            }
+            else
+            {
+                <td data-toggle="tooltip" title="@item.pocet kusů skladem" data-placement="right">
+                ❌
+                </td>
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.cena) Kč
+            </td>
+            <td>
+                @if (@item.pocet > 0)
+                {
+                    <form asp-action="AddToCart" method="post" asp-route-id="@item.ID">
+                        <button style="float:right" class="btn btn-primary">🛒 Přidat do košíku</button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-action="#"  asp-route-id="@item.ID">
+                        <button style="float:right" disabled class="btn btn-primary">⛔ Momentálně nedostupné</button>
+                    </form>
+                }
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,98 @@
+﻿@model OrderCustomer
+@using WebApp_project.Models
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container d-flex justify-content-center">
+    <div class="row">
+
+        <div class="card" style="width: auto; margin-top:2%;">
+            <div class="card-body">
+                <h5 class="card-title">Dokončit objednávku</h5>
+                <p class="card-text">
+                    @using (Html.BeginForm())
+                    {
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(x => x.name)
+                                @Html.TextBoxFor(x => x.name, new { @class = "form-control", placeholder = "Petr" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.name)</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(x => x.lastname)
+                                @Html.TextBoxFor(x => x.lastname, new { @class = "form-control", placeholder = "Klitsch" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.lastname)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.email)
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.email, new { @class = "form-control", placeholder = "qwertz@xyz.com" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.email)</div>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.phoneNum)
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.phoneNum, new { @class = "form-control", placeholder = "123123123", @type = "number" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.phoneNum)</div>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(x => x.city)
+                                @Html.TextBoxFor(x => x.city, new { @class = "form-control", placeholder = "Bystřice" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.city)</div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.LabelFor(x => x.adress)
+                                @Html.TextBoxFor(x => x.adress, new { @class = "form-control", placeholder = "Nydecká 13" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.adress)</div>
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.pCode)
+                            <div class="col-sm-12">
+                                @Html.TextBoxFor(x => x.pCode, new { @class = "form-control", placeholder = "739 95", @type = "number" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.pCode)</div>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.transportType)
+                            <div class="col-sm-12">
+                                @Html.DropDownListFor(x => x.transportType, (List<SelectListItem>)ViewBag.TTypes, new { @class = "form-control" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.transportType)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.paymentType)
+                            <div class="col-sm-12">
+                                @Html.DropDownListFor(x => x.paymentType, (List<SelectListItem>)ViewBag.PTypes, new { @class = "form-control" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.paymentType)</div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <button type="submit" class="btn btn-success" >Odeslat objednávku</button>
+                    }
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>

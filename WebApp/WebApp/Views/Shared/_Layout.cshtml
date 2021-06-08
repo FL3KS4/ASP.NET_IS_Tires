@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Home</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <script>
+
+        function searchTires(input) {
+            var tires = $(".AllTires > tr");
+
+            $.each(tires, function () {               
+                var name = $.trim(this.children[0].innerText);
+                console.log(name.includes(input));
+                if (name.toLowerCase().includes(input.toLowerCase())) {
+
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+
+
+        $(document).ready(
+            function () {
+
+                $(".myInput").on("change", function () {
+                    var tmpPrice = 0;
+                    var rows = $(".myTable > tr");
+                    $.each(rows, function () {
+                        var price = this.children[2].innerText;
+                        var count = this.children[1].children[0].value;
+
+                        tmpPrice = (price * count) + tmpPrice;
+                    });
+
+                    $(".cena").text("Celková cena: " + tmpPrice);
+                });
+
+                $(".filter").on("keyup", function () {
+                    searchTires(this.value);
+                });
+            });
+
+    </script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-primary navbar-expand-lg ">
+                <a style="width: 15%" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pneuservis</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Domů</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="CustomerGuest">Rezervace bez přihlášení</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Eshop">Eshop</a>
+                        </li>
+                        <li class="nav-item ml-md-auto">
+                            <button class="btn btn-outline-light" type="button" onclick="location.href='@Url.Action("Cart","Home")'">@ViewBag.Cart.Count 🛒</button>
+                            <button class="btn btn-outline-light" type="button" onclick="location.href='@Url.Action("Login","Home")'"> Přihlásit</button>
+                        </li>
+                    </ul>
+                </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="navbar fixed-bottom navbar-dark bg-primary">
+        <div class="navbar-brand">
+            &copy; 2021 - TiresIS
+        </div>
+    </footer>
+    
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+﻿@model Vozidlo
+@using WebApp_project.Models
+@{
+    ViewData["Title"] = "Přidat vozidlo";
+    Layout = "~/Views/Customers/CLayout.cshtml";
+}
+
+<div class="container d-flex justify-content-center">
+    <div class="row">
+
+        <div class="card" style="width: 21rem; margin-top:2%;">
+            <div class="card-body">
+                <h5 class="card-title">Uprava informací zákazníka</h5>
+                <p class="card-text">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.znacka)
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.znacka, new { @class = "form-control", placeholder = "VW GOLF 1.9"})
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.znacka)</div>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.spz)
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.spz, new { @class = "form-control", placeholder = "9T96520" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.spz)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.typVozidlaID)
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(x => x.typVozidlaID, (List<SelectListItem>)ViewBag.Types, new { @class = "form-control"})
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.typVozidlaID)</div>
+                            </div>
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-success">Přidat vozidlo</button>
+                    }
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>

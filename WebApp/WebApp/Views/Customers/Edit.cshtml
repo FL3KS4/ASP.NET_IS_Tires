@@ -1,0 +1,73 @@
+﻿@model Zakaznik
+@using WebApp_project.Models
+@{
+    ViewData["Title"] = "Úprava informací";
+    Layout = "~/Views/Customers/CLayout.cshtml";
+}
+
+<div class="container d-flex justify-content-center">
+    <div class="row">
+
+        <div class="card" style="width: 21rem; margin-top:2%;">
+            <div class="card-body">
+                <h5 class="card-title">Uprava informací zákazníka</h5>
+                <p class="card-text">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.jmeno)
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.jmeno, new { @class = "form-control" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.jmeno)</div>
+
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.prijmeni)
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.prijmeni, new { @class = "form-control" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.prijmeni)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.login)
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.login, new { @class = "form-control", @readonly = "readonly" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.login)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.telefon)
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.telefon, new { @class = "form-control" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.telefon)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.adresa)
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.adresa, new { @class = "form-control" })
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.adresa)</div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            @Html.LabelFor(x => x.heslo)
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.heslo, new { @class = "form-control", @type="password"})
+                                <div style="color:red;margin-top:5px;">@Html.ValidationMessageFor(x => x.heslo)</div>
+                            </div>
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-success">Uložit </button>
+                    }
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>

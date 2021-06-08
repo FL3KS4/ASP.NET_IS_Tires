@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Úspěšná rezervace";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="alert alert-success" role="alert"> Adding into calender was successful</div>
+            <div class="alert alert-warning" role="alert"> Redirecting in: <p class="timer" style="display:inline"></p> </div>
+        </div>
+        <div class="col-sm-2">
+
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            window.location.href = "Index";
+        }, 5000);
+        i = 5;
+        interval = setInterval(function () {
+            $(".timer").text(i);
+            i--;
+        }, 1000);
+
+    });
+</script>
+

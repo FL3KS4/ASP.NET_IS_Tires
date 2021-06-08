@@ -1,0 +1,88 @@
+﻿
+
+
+@model Eshop
+@using WebApp_project.Models
+@{int price = 0;}
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<p>
+    <h1>Košík</h1>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.znacka)
+            </th>
+            <th>
+                Kusů
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cena)/Kus (Kč)
+            </th>
+            <th>
+               
+            </th>
+        </tr>
+    </thead>
+    <tbody class="myTable">
+        @foreach (Eshop item in ViewBag.CartItems)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.znacka)
+                </td>
+                <td>
+                    <input class="myInput" value="@item.pocet" type="number" min="1" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cena)
+                </td>
+                <td>
+                </td>
+            </tr>
+            {
+                price = price + (item.cena * item.pocet);
+            }
+
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+
+            <th>
+                <h6 class="cena">Celková cena: @price</h6>
+            </th>
+            <th>
+                <form asp-action="EmptyCart" method="post">
+                    <button style="float:right" class="btn btn-secondary">Vyprázdnit košík</button>
+                </form>
+            </th>
+
+            @if (ViewBag.CartItems.Count == 0)
+            {
+
+                <th>
+                    <h1>Košík je prazdný!!</h1>
+                </th>
+            }
+            else
+            {
+        <th>                   
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("Order","Home")'">Objednat</button>
+        </th>
+            }
+
+        </tr>
+    </tfoot>
+
+</table>
+
+
+

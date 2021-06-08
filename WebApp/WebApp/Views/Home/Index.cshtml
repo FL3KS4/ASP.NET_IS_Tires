@@ -1,0 +1,23 @@
+﻿@model InfoTable
+@using WebApp_project.Models
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container d-flex justify-content-center ">
+    <div class="row">
+
+        <div class="col ">
+            <h1>Pneuservis veselá guma</h1>
+            <p>Vítejte na stránkách servisu, ASP.NET webapp vytvořena <em>JOC0027</em>!</p>
+            <h2>Pneuservis má momentálně</h2>
+            <p><strong>Počet kluků servisáků: @ViewBag.Info.pracovniciCount</strong></p>
+            <ul>
+                <li><strong>Zákazníků:  @ViewBag.Info.zakaznikCount</strong> </li>
+                <li><strong>Vozidel: @ViewBag.Info.vozidlaCount</strong> </li>
+                <li><strong>Pneumatik v Eshopu:  @ViewBag.Info.pneuCount</strong> </li>
+            </ul>
+        </div>
+    </div>
+</div>

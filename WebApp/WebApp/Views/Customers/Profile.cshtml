@@ -1,0 +1,104 @@
+﻿@model Zakaznik
+@using WebApp_project.Models
+
+@{
+    ViewData["Title"] = "Profil";
+    Layout = "~/Views/Customers/CLayout.cshtml";
+}
+
+<div class="card" style="margin-top: 2%;">
+    <div class="card-header">
+        Karta zákazníka
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Zákazník: @ViewBag.Info.login </h5>
+        <p class="card-text">
+            Jméno: @ViewBag.Info.jmeno
+            <br />
+            Příjmení: @ViewBag.Info.prijmeni
+            <br />
+            Login: @ViewBag.Info.login
+            <br />
+            Telefon: @ViewBag.Info.telefon
+            <br />
+            Adresa:  @ViewBag.Info.adresa
+
+        </p>
+        <button onclick="location.href='@Url.Action("Edit","Customers")'" type="button" class="btn btn-primary">Upravit info </button>
+    </div>
+
+    <div id="accordion">
+        <div class="card" style="margin-top: 2%;">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Vozidla zákazníka
+                    </button>
+                    <button type="button" onclick="location.href='@Url.Action("AddVehicle","Customers")'" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#exampleModal2">Přidat vozidlo </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        @if (ViewBag.Vozidla != null)
+                        {
+                            @foreach (VozidloPneu v in ViewBag.Vozidla)
+                            {
+
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div name="id_col" class="col">
+                                            @v.znacka
+                                        </div>
+                                        <div class="col">
+                                            @v.spz
+                                        </div>
+                                        <div class="col">
+                                            @v.predniP
+                                        </div>
+                                        <div class="col">
+                                            @v.zadniP
+                                        </div>
+                                        <div class="col">
+                                            @v.rozmery
+                                        </div>
+                                        <div class="col deleteID">
+                                            @using (Html.BeginForm())
+                                            {
+
+                                                <button class="btn btn-light myid"  id="@v.ID @ViewBag.Info.ID" onclick="location.href='@Url.Action("Profile","Customers")'">Delete</button>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </li>
+
+
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(".myid").on("click", function (event) {
+        var tdid = $(this).attr("id");
+        console.log(tdid);
+        $.ajax({
+            url: "@Url.Action("DeleteVeh")",
+            type: "POST",
+            data: { IDs: tdid},
+            success: function (data) {
+                alert(data);
+            }
+        });
+    });
+</script>
+

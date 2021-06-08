@@ -1,0 +1,27 @@
+﻿@using WebApp_project.Models
+@{
+    ViewData["Title"] = "Profil";
+    Layout = "~/Views/Workers/WLayout.cshtml";
+}
+
+<div class="card" style="margin-top: 2%;">
+    <div class="card-header">
+        Karta servisního pracovníka
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Pracovník: @ViewBag.Info.login </h5>
+        <p class="card-text">
+            Jméno: @ViewBag.Info.jmeno
+            <br />
+            Příjmení: @ViewBag.Info.prijmeni
+            <br />
+            Login: @ViewBag.Info.login
+            <br />
+            Telefon: @ViewBag.Info.telefon
+            <br />
+            Datum narození:  @ViewBag.Info.datum_narozeni
+
+        </p>
+        <button onclick="location.href='@Url.Action("Edit","Workers")'" type="button" class="btn btn-dark btn-outline-light changeColor">Upravit info </button>
+        </div>
+</div>
